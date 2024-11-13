@@ -6,3 +6,4 @@ github:
   push:
     branch: "^main$"
 filename: "cloudbuild.yaml"
+qui

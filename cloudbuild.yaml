@@ -6,7 +6,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-t', 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01',
+      '-t', 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v02',
       '.'
     ]
 
@@ -14,7 +14,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01'
+      'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v02'
       
     ]
 
@@ -23,7 +23,7 @@ steps:
     entrypoint: 'gcloud'
     args: [
       'run', 'deploy', 'my-repo',  # 替換為您的 Cloud Run 服務名稱
-      '--image', 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01',
+      '--image', 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v02',
       '--region', 'asia-east1',
       '--allow-unauthenticated',
       '--port', '80'
@@ -31,4 +31,4 @@ steps:
 
 images:
   # Specify the Docker image to push
-  - 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01'
+  - 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v02'

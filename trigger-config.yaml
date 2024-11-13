@@ -1,0 +1,8 @@
+name: cloud-build-touch
+description: "Trigger for cloud-build-touch"
+github:
+  owner: "haha1811"
+  name: "repo"
+  push:
+    branch: "^main$"
+filename: "cloudbuild.yaml"

@@ -1,0 +1,34 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # 或者設置為 CLOUD_LOGGING_ONLY 或 NONE
+
+steps:
+  # Step 1: Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01',
+      '.'
+    ]
+
+  # Step 2: Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01'
+      
+    ]
+
+  # Step 3: Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: [
+      'run', 'deploy', 'my-repo',  # 替換為您的 Cloud Run 服務名稱
+      '--image', 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01',
+      '--region', 'asia-east1',
+      '--allow-unauthenticated',
+      '--port', '80'
+    ]
+
+images:
+  # Specify the Docker image to push
+  - 'asia-east1-docker.pkg.dev/lab-dev-421508/my-repo/ap:v01'
